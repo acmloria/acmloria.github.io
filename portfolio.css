@@ -1,0 +1,371 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+font-family: 'Alegreya Sans', sans-serif;
+font-family: 'Cinzel', serif;
+font-family: 'Great Vibes', cursive;
+font-family: 'Lora', serif;
+font-family: 'Pacifico', cursive;*/
+
+
+
+body {
+  color: #EFEFEF;
+  font-family: 'Alegreya Sans', sans-serif;
+  min-height: 100vh;
+  background-color: #fefefe;
+}
+
+
+a {
+  color: #98ff98;
+  text-decoration: none;
+}
+
+nav {
+  
+
+}
+.header {
+  /*position: fixed;*/
+  /*z-index: 3;*/
+  width: 75%;
+  height: 90px;
+  border-bottom: 2px solid black;
+}
+.brand {
+  font-family: 'Great Vibes', cursive;
+  font-weight: 800;
+  color: black;
+}
+
+.brand:hover {
+  color: #98ff98;
+}
+
+/*ul {
+  list-style: none;
+}
+*/
+.navlink {
+  color: black;
+  font-family: 'Lora', serif;
+}
+
+.navlink:hover {
+  color: #98ff98;
+}
+.txt-shaddow {
+  text-shadow: 1px 1px 1px #000000;
+}
+
+#mySidenav a {
+  position: absolute;
+  left: -200px;
+  transition: 0.3s;
+  padding: 15px;
+  width: 250px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #bfbfbf;
+  border-radius: 0 5px 5px 0;
+}
+
+#mySidenav a:hover {
+    left: 0;
+
+}
+
+#home {
+  top: 40px;
+  background-color: rgba(76, 175, 80, 0.6);
+
+}
+
+#experience {
+  top: 120px;
+  background-color: rgba(33, 150, 243, 0.6);
+}
+
+#capstone {
+  top: 200px;
+  background-color: rgba(244, 67, 54, 0.6);
+}
+
+#services {
+  top: 280px;
+  background-color: rgba(255, 99, 71,0.6);
+}
+
+#gallery {
+  top: 360px;
+  background-color: rgba(0, 51, 204,0.6);
+}
+
+#contact {
+  top: 440px;
+  background-color: rgba(0, 255, 255,0.6);
+}
+
+hr {
+  width: 5rem;
+  border: none;
+  height: 2px;
+  background-color: #00BCD4;
+  margin: 1.5rem 0;
+}
+
+/*main {
+  min-height: 100vh;*/
+  /*display: flex;*/
+  /*align-items: center; 
+  justify-content: center;
+}*/
+
+.transbox {
+  margin: 30px;
+  background-color: #fff;
+  border: 1px solid black;
+  opacity: 0.2;
+  filter: alpha(opacity=20); /* For IE8 and earlier */
+  position: fixed;
+  z-index: -2;
+  display: flex;
+  align-items: center;
+  height: 80vh;
+  width: 150vh;
+  top: 1.7rem;
+  left: 2.5rem;
+  
+
+}
+.card-ac {
+  height: 450px;
+}
+
+.card-ac:hover {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+ul {
+  list-style: none;
+}
+ul > li {
+  list-style: none;
+}
+
+/*
+.parallax {
+  
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color:rgba(255, 0, 0, 0.2);
+  height: 100vh;
+  position: relative;
+  z-index: -6;
+}*/
+
+
+/*.container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  /*height: 100vh;*/
+
+
+.row {
+  width: 100%
+  background-color: blue;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.mini-box {
+  width: 50%;
+  padding: 3rem;
+}
+
+.col-1 {
+  width: 8.33%
+}
+
+.col-6 {
+  width: 50%
+}
+
+/*.overview {
+  padding: 3rem;
+  margin-left: 5rem;
+}*/
+
+.title {
+  font-weight: 300;
+  letter-spacing: 10px;
+  margin-bottom: .5rem;
+  font-family: 'Pacifico', cursive;
+  text-shadow: 2px 2px 2px #98ff98;
+}
+
+.description {
+  /*margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.75;*/
+  align-content: center;
+  font-family: 'Alegreya Sans', sans-serif;
+}
+
+.pic-ac {
+  height: 155px;
+}
+
+.job-title {
+  color: #98ff98;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: .75rem;
+  margin-bottom: 1rem;
+  font-weight: bolder;
+}
+
+.image-container {
+  /*margin-right: 5rem;*/
+  width: 100%;
+  /*padding: 3rem;*/
+}
+
+.image-container img {
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin: auto;
+  display: block;
+}
+
+.works {
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.works h2 {
+  font-weight: 300;
+  letter-spacing: 3px;
+  margin-bottom: 1rem;
+}
+
+.works img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
+.social-media a {
+  color: #98ff98;
+  margin: 0 .5rem;
+  font-size: 1.5rem;
+  opacity: .75;
+}
+
+.social-media a:hover {
+  opacity: 1.5;
+  color: #98ff98;
+  text-shadow: 1px 1px 1px #000000;
+}
+
+.connect {
+  font-family: 'Alegreya Sans', sans-serif;
+}
+
+.ad {
+  margin: .5rem;
+  font-size: 1rem;
+}
+
+.footer {
+  font-family: 'Lora', serif;
+  border-top: 2px solid black;
+  width: 75%;
+  /*height: 600px;*/
+  bottom: 0;
+  /*position: relative;*/
+  padding-top: 5px;
+}
+
+.footer-content {
+  margin: 0;
+  position: relative;
+  top: 100%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+@media (max-width: 980px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .image-container {
+    width: 100%;
+    padding: 3rem 0 0;
+  }
+
+  .overview {
+    order: 1;
+    padding: 3rem 0;
+  }
+
+  main {
+    background:
+      linear-gradient(
+        rgba(0, 255, 222, 0.45),
+        rgba(0, 88, 255, 0.45)
+      ), url('https://www.insurancejournal.com/app/uploads/2013/10/sea_level-300x200.jpg');
+  }
+
+  .title, .job-title {
+    text-align: center;
+  }
+
+  .job-title {
+    font-weight: bolder;
+  }
+
+  .description {
+    text-align: center;
+  }
+
+  hr {
+    margin: auto;
+  }
+
+  .contact-btn {
+    display: block;
+    margin: auto;
+  }
+
+  .social-media {
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  .ad {
+    text-align: center;
+  }
+
+  .works {
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .header {
+    height: 110px;
+  }
+}

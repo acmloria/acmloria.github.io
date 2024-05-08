@@ -63,6 +63,11 @@ nav {
   text-shadow: 1px 1px 1px #000000;
 }
 
+#description {
+  font-size: 8px;
+
+}
+
 #mySidenav a {
   position: absolute;
   left: -200px;

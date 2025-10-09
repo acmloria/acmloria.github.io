@@ -144,9 +144,7 @@
   
   }
   
-  //Colors
-  $black: #34435E;
-  $white: #ffffff;
+  /* Colors: #34435E (black), #ffffff (white) */
   
   body {
     margin: 0;
@@ -160,62 +158,62 @@
   }
   
   p {
-    font-size: 1em;
-    line-height: 1.75em;
-    border-top: 3px solid;
-    border-image: linear-gradient(to right, #743ad5 0%, #d53a9d 100%);
-    border-image-slice: 1;
-    border-width: 3px;
-    margin: 0;
-    padding: 40px;
-    counter-increment: section;
-    position: relative;
-    color: $black;
-    
-    //numbers
-    &:before {
+      font-size: 1em;
+      line-height: 1.75em;
+      border-top: 3px solid;
+      border-image: linear-gradient(to right, #743ad5 0%, #d53a9d 100%);
+      border-image-slice: 1;
+      border-width: 3px;
+      margin: 0;
+      padding: 40px;
+      counter-increment: section;
+      position: relative;
+      color: #000; /* replaced $black with #000 */
+  }
+  
+  p::before {
       content: counter(section);
       position: absolute;
       border-radius: 50%;
-      padding: 10px;
+      /* padding: 10px; */
       height: 1.25em;
       width: 1.25em;
-      background-color: $black;
+      background-color: #000; /* replaced $black with #000 */
       text-align: center;
       line-height: 1.25em;
-      color: $white;
+      color: #fff; /* replaced $white with #fff */
       font-size: 1em;
-    }
   }
-  //odd number borders
+  
   p:nth-child(odd) {
-    border-right: 3px solid;
-    padding-left: 0;
-    
-    &:before {
+      border-right: 3px solid;
+      padding-left: 0;
+  }
+  
+  p:nth-child(odd)::before {
       left: 100%; 
       margin-left: -20px;
-    }
   }
-  //even number borders
+  
   p:nth-child(even) {
-    border-left: 3px solid;
-    padding-right: 0;
-    
-    &:before {
+      border-left: 3px solid;
+      padding-right: 0;
+  }
+  
+  p:nth-child(even)::before {
       right: 100%; 
       margin-right: -20px;
-    }
   }
-  //handle first and last
+  
   p:first-child {
-    border-top: 0;
-    border-top-right-radius:0;
-    border-top-left-radius:0;
+      border-top: 0;
+      border-top-right-radius:0;
+      border-top-left-radius:0;
   }
+  
   p:last-child {
-    border-bottom-right-radius:0;
-    border-bottom-left-radius:0;
+      border-bottom-right-radius:0;
+      border-bottom-left-radius:0;
   }
   
   /*
@@ -240,8 +238,8 @@
   
   
   .row {
-    width: 100%
-    background-color: blue;
+    width: 100%;
+    /* background-color: blue; */
     display: flex;
     align-items: center;
     position: relative;
@@ -423,3 +421,57 @@
     }
   }
   
+/* === Clean blog paragraphs (no decorative border lines) === */
+#blog-post p,
+#blog-list p,
+.post-body p,
+.bi-excerpt {
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 0 1rem 0 !important;
+  line-height: 1.7;
+  color: #222; /*readable dark text*/
+}
+
+#blog-post p + p {
+  margin-top: 1rem;
+}
+
+/* Optional: make overall post width readable */
+#blog-post {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* === Remove paragraph numbering and timeline lines in blog pages === */
+#blog-post p,
+#blog-list p,
+.post-body p,
+.bi-excerpt {
+  counter-increment: none !important;
+}
+#blog-post p::before,
+#blog-list p::before,
+.post-body p::before,
+.bi-excerpt::before {
+  content: none !important;
+}
+
+/* --- Fix header overlap & make inner content scrollable --- */
+
+/* Keep header visible on top */
+.header {
+  position: sticky;       /* stays at top while scrolling */
+  top: 0;
+  z-index: 1000;
+  background: #fff;       /* so content doesn't show through */
+}
+
+/* Cancel the global 100vh flex on this page's main container */
+main.container {
+  display: block !important;
+  align-items: initial !important;
+  height: auto !important;
+  padding-top: 1rem;      /* breathing room under header */
+}

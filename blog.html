@@ -47,46 +47,47 @@
 </head>
 
 <body>
-</head>
-<body>
   <header class="header mx-auto">
-      <div class="row"> 
-        <div class="col-md-2 text-center brand">  
-          <a href="./index.html" class="brand">It's an AC Life</a>
-
-        </div>
-        <div class="col-md-10"> 
-          <nav class="navbar">
-
-            <ul>
-              <li><a href="./timeline.html" class="navlink">Timeline</a> </li>
-              <li><a href="./about.html" class="navlink">About Me</a></li>
-              <li><a href="./blog.html" class="navlink">Blog</a><i class="fas fa-angle-left"></i></li>
-            </ul>
-          </nav>
-        </div>
+    <div class="row">
+      <div class="col-md-2 text-center brand"><a href="./index.html" class="brand">It's an AC Life</a></div>
+      <div class="col-md-10">
+        <nav class="navbar">
+          <ul>
+            <li><a href="./timeline.html" class="navlink">Timeline</a></li>
+            <li><a href="./about.html" class="navlink">About Me</a></li>
+            <li><a href="./blog.html" class="navlink">Blog</a></li>
+          </ul>
+        </nav>
       </div>
+    </div>
   </header>
 
-  <div class="container">
-    <div class="row mx-auto">
-      
-    <h1 class="title txt-shaddow text-center">Something good is about to happen.</h1>
+  <main class="container my-4">
+    <!-- Controls -->
+    <div class="d-flex align-items-center flex-wrap gap-2 mb-3">
+      <input id="blog-search" class="form-control mr-2" style="max-width:260px" placeholder="Search title or tags…">
+      <div id="tag-cloud" class="d-flex flex-wrap" style="gap:.35rem;"></div>
+      <button id="clear-blog-filter" class="btn btn-sm btn-outline-secondary ml-2 d-none">Clear filter</button>
     </div>
-    
-  </div>
+
+    <!-- List view -->
+    <section id="blog-list" class="list-view"></section>
+
+    <!-- Detail view -->
+    <article id="blog-post" class="post-view d-none"></article>
+
+    <noscript><p class="text-muted">Enable JavaScript to view posts.</p></noscript>
+  </main>
 
   <footer class="footer text-center mx-auto">
-    <div class="footer-content">
-     &copy; Angelica Cassandra Loria, unless otherwise stated
-      
-
-    </div>
-      
-
-    
+    <div class="footer-content">&copy; Angelica Cassandra Loria, unless otherwise stated</div>
   </footer>
 
-
+  <!-- Scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="./js/render-blog.js" defer></script>
 </body>
+
 </html>

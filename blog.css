@@ -475,3 +475,27 @@ main.container {
   height: auto !important;
   padding-top: 1rem;      /* breathing room under header */
 }
+
+/* === Keep blog content aligned with header and footer === */
+main.container {
+  width: 75%;              /* match header/footer width */
+  margin: 0 auto;          /* center horizontally */
+  display: block;
+  align-items: initial;
+  height: auto;
+  padding: 2rem 1rem;      /* balanced inner spacing */
+  overflow-y: auto;        /* scrolls inside if needed */
+  background-color: #fff;  /* ensures background consistent */
+}
+
+/* Adjust scroll height if header/footer are fixed or sticky */
+html, body {
+  height: 100%;
+  overflow-y: auto;        /* allows full-page scroll */
+}
+
+/* Optional: constrain inner post width for better reading */
+#blog-list, #blog-post {
+  max-width: 780px;
+  margin: 0 auto;
+}

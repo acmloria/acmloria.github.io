@@ -1,7 +1,7 @@
 * {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 /*
@@ -14,58 +14,58 @@ font-family: 'Pacifico', cursive;*/
 
 
 body {
-	color: #EFEFEF;
-	font-family: 'Alegreya Sans', sans-serif;
-	min-height: 100vh;
-	background-color: #fefefe;
+  color: #EFEFEF;
+  font-family: 'Alegreya Sans', sans-serif;
+  min-height: 100vh;
+  background-color: #fefefe;
 }
 
 
 a {
-	color: #98ff98;
-	text-decoration: none;
+  color: #98ff98;
+  text-decoration: none;
 }
 
 nav {
-	
+  
 
 }
 .header {
-	/*position: fixed;*/
-	/*z-index: 3;*/
-	width: 75%;
-	height: 90px;
-	border-bottom: 2px solid black;
+  /*position: fixed;*/
+  /*z-index: 3;*/
+  width: 75%;
+  height: 90px;
+  border-bottom: 2px solid black;
 }
 .brand {
-	font-family: 'Great Vibes', cursive;
-	font-weight: 800;
-	color: black;
-	-ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  position: relative;
-  top: 40%;
-  margin: 0;
+  font-family: 'Great Vibes', cursive;
+  font-weight: 800;
+  color: black;
 }
 
 .brand:hover {
-	color: #98ff98;
+  color: #98ff98;
 }
 
-ul {
-	list-style: none;
+/*ul {
+  list-style: none;
 }
-
+*/
 .navlink {
-	color: black;
-	font-family: 'Lora', serif;
+  color: black;
+  font-family: 'Lora', serif;
 }
 
 .navlink:hover {
-	color: #98ff98;
+  color: #98ff98;
 }
 .txt-shaddow {
-	text-shadow: 1px 1px 1px #000000;
+  text-shadow: 1px 1px 1px #000000;
+}
+
+#description {
+  font-size: 8px;
+
 }
 
 #mySidenav a {
@@ -81,7 +81,7 @@ ul {
 }
 
 #mySidenav a:hover {
-  	left: 0;
+    left: 0;
 
 }
 
@@ -116,92 +116,348 @@ ul {
   background-color: rgba(0, 255, 255,0.6);
 }
 
+hr {
+  width: 5rem;
+  border: none;
+  height: 2px;
+  background-color: #00BCD4;
+  margin: 1.5rem 0;
+}
+
+/*main {
+  min-height: 100vh;*/
+  /*display: flex;*/
+  /*align-items: center; 
+  justify-content: center;
+}*/
+
+.transbox {
+  margin: 30px;
+  background-color: #fff;
+  border: 1px solid black;
+  opacity: 0.2;
+  filter: alpha(opacity=20); /* For IE8 and earlier */
+  position: fixed;
+  z-index: -2;
+  display: flex;
+  align-items: center;
+  height: 80vh;
+  width: 150vh;
+  top: 1.7rem;
+  left: 2.5rem;
+  
+
+}
+.card-ac {
+  height: 450px;
+}
+
+.card-ac:hover {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+ul {
+  list-style: none;
+}
+ul > li {
+  list-style: none;
+}
+
+/*
+.parallax {
+  
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color:rgba(255, 0, 0, 0.2);
+  height: 100vh;
+  position: relative;
+  z-index: -6;
+}*/
 
 
+/*.container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  /*height: 100vh;*/
+
+
+.row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.mini-box {
+  width: 50%;
+  padding: 3rem;
+}
 
 .col-1 {
-	width: 8.33%
+  width: 8.33%
 }
 
 .col-6 {
-	width: 50%
+  width: 50%
 }
 
 /*.overview {
-	padding: 3rem;
-	margin-left: 5rem;
+  padding: 3rem;
+  margin-left: 5rem;
 }*/
 
-.fullname {
-	font-weight: 300;
-	letter-spacing: 10px;
-	margin-bottom: .5rem;
-	font-family: 'Pacifico', cursive;
+.title {
+  font-weight: 300;
+  letter-spacing: 10px;
+  margin-bottom: .5rem;
+  font-family: 'Pacifico', cursive;
+  text-shadow: 2px 2px 2px #98ff98;
 }
 
 .description {
-	/*margin-top: 1.5rem;
-	margin-bottom: 1.5rem;
-	line-height: 1.75;*/
-	align-content: center;
-	font-family: 'Alegreya Sans', sans-serif;
+  /*margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.75;*/
+  align-content: center;
+  font-family: 'Alegreya Sans', sans-serif;
+}
+
+.pic-ac {
+  height: 155px;
 }
 
 .job-title {
-	color: #98ff98;
-	text-transform: uppercase;
-	letter-spacing: 2px;
-	font-size: .75rem;
-	margin-bottom: 1rem;
-	font-weight: bolder;
+  color: #98ff98;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: .75rem;
+  margin-bottom: 1rem;
+  font-weight: bolder;
 }
 
+.image-container {
+  /*margin-right: 5rem;*/
+  width: 100%;
+  /*padding: 3rem;*/
+}
 
+.image-container img {
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin: auto;
+  display: block;
+}
 
+.works {
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.works h2 {
+  font-weight: 300;
+  letter-spacing: 3px;
+  margin-bottom: 1rem;
+}
+
+.works img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
 
 .social-media a {
-	color: #98ff98;
-	margin: 0 .5rem;
-	font-size: 1.5rem;
-	opacity: .75;
+  color: #98ff98;
+  margin: 0 .5rem;
+  font-size: 1.5rem;
+  opacity: .75;
 }
 
 .social-media a:hover {
-	opacity: 1.5;
-	color: #98ff98;
-	text-shadow: 1px 1px 1px #000000;
+  opacity: 1.5;
+  color: #98ff98;
+  text-shadow: 1px 1px 1px #000000;
 }
 
 .connect {
-	font-family: 'Alegreya Sans', sans-serif;
+  font-family: 'Alegreya Sans', sans-serif;
 }
 
 .ad {
-	margin: .5rem;
-	font-size: 1rem;
+  margin: .5rem;
+  font-size: 1rem;
 }
 
 .footer {
-	font-family: 'Lora', serif;
-	border-top: 2px solid black;
-	width: 75%;
-	height: 50px;
+  font-family: 'Lora', serif;
+  border-top: 2px solid black;
+  width: 75%;
+  /*height: 600px;*/
+  bottom: 0;
+  /*position: relative;*/
+  padding-top: 5px;
 }
 
 .footer-content {
-	margin: 0;
+  margin: 0;
   position: relative;
-  top: 50%;
+  top: 100%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
 
-hr {
-	visibility: hidden;
+@media (max-width: 980px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .image-container {
+    width: 100%;
+    padding: 3rem 0 0;
+  }
+
+  .overview {
+    order: 1;
+    padding: 3rem 0;
+  }
+
+  main {
+    background:
+      linear-gradient(
+        rgba(0, 255, 222, 0.45),
+        rgba(0, 88, 255, 0.45)
+      ), url('https://www.insurancejournal.com/app/uploads/2013/10/sea_level-300x200.jpg');
+  }
+
+  .title, .job-title {
+    text-align: center;
+  }
+
+  .job-title {
+    font-weight: bolder;
+  }
+
+  .description {
+    text-align: center;
+  }
+
+  hr {
+    margin: auto;
+  }
+
+  .contact-btn {
+    display: block;
+    margin: auto;
+  }
+
+  .social-media {
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  .ad {
+    text-align: center;
+  }
+
+  .works {
+    text-align: center;
+  }
 }
 
 @media only screen and (max-width: 768px) {
   .header {
-  	height: 110px;
+    height: 110px;
   }
 }
+
+/* ==== Project Cards: uniform height, clamp desc, tag chips ==== */
+
+/* Grid flex so all columns stretch to equal height */
+#project-grid { display: flex; flex-wrap: wrap; align-items: stretch; }
+#project-grid > .col-md-4, 
+#project-grid > .col-sm-6, 
+#project-grid > .col-12 { display: flex; }
+
+/* Override older .card-ac height with a flexible layout */
+#project-grid .card-ac {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+#project-grid .card-ac:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 10px 24px rgba(0,0,0,.15);
+  z-index: 2;
+}
+
+/* Consistent image height (overrides .pic-ac: 155px) */
+#project-grid .card-ac .card-img-top {
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Title: reserve ~2 lines so heights match across cards */
+#project-grid .card-ac h3 {
+  font-size: 1.1rem;
+  margin: .75rem 0 .5rem;
+  min-height: 2.2em;
+}
+
+/* Primary link (title → link) */
+#project-grid .card-ac .primary-link {
+  display: inline-block;
+  margin-bottom: .35rem;
+  font-weight: 600;
+}
+
+/* 3-line clamp; keep white space if shorter */
+#project-grid .card-ac .desc {
+  font-size: .92rem;
+  line-height: 1.4;
+  min-height: calc(1.4em * 3);   /* reserves space for up to 3 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;          /* clamp to 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Clickable tag chips + focus/hover */
+#project-grid .tag-chip {
+  cursor: pointer;
+  user-select: none;
+  margin-right: .35rem;
+  margin-bottom: .35rem;
+}
+#project-grid .tag-chip:hover,
+#project-grid .tag-chip:focus { opacity: .9; }
+
+/* Ensure your global UL reset doesn’t collapse spacing too much */
+#project-grid .card-ac ul { padding-left: 1rem; margin-bottom: .5rem; }
+
+/* Optional: slightly taller images on larger screens */
+@media (min-width: 992px) {
+  #project-grid .card-ac .card-img-top { height: 220px; }
+}
+
+/* === Subtle gray tone for title and description === */
+#project-grid .card-ac h3 {
+  color: #333;          /* dark gray for titles */
+}
+
+#project-grid .card-ac .desc {
+  color: #555;          /* slightly lighter gray for descriptions */
+}
+
+#project-grid .card-ac {
+  background-color: #fff;
+}
+

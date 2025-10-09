@@ -461,3 +461,26 @@ ul > li {
   background-color: #fff;
 }
 
+/* === Center project cards when only 1 or 2 === */
+#project-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* default for 3+ cards */
+  align-items: stretch;
+  width: 100%;
+}
+
+/* If only 1 or 2 cards, center them */
+#project-grid:has(> .col-md-4:nth-child(1):last-child),
+#project-grid:has(> .col-md-4:nth-child(2):last-child) {
+  justify-content: center;
+}
+
+/* Browser fallback (if :has() not supported): graceful degradation */
+@supports not (selector(:has(*))) {
+  #project-grid {
+    justify-content: center; /* fallback; will center all cards */
+  }
+}
+
+

@@ -1,0 +1,15 @@
+[
+  {
+    "id": "project-manmanlai",
+    "title": "Why I Built an AI Essay Correction App for Taiwanese Learners",
+    "date": "2025-09-28",
+    "tags": ["LLM", "NLP", "T5", "LoRA"],
+    "cover": "./images/t5_lora.png",
+    "excerpt": "Aside from it is a requirement for my degree, I built this app to help Taiwanese learners improve their writingskills using AI.",
+    "contentHtml": [
+      "<h5>A Vision for Bilingual 2030, Not Just Perfect Grammar</h5><p>Taiwan’s Bilingual 2030 goal inspired me, but what I see every day in classrooms tells a quieter story. Many Taiwanese learners want to write well in English, but they struggle not just with grammar; they struggle with confidence. They worry about making mistakes, so they hold back their ideas. As a teacher and researcher, I’ve always wished I could give feedback that is gentle and gradual, one that doesn’t erase the learner’s original voice. I wanted to create a tool that helps them grow, not depend, to make feedback that sticks, not just corrections that impress.</p>",
+      "<p>In my lab, we’ve explored existing tools like ChatGPT and Grammarly, but both fall short for learning. ChatGPT is non-deterministic; the same essay can get different answers every time, while Grammarly tends to rewrite too much, lifting learners’ sentences far above their actual level. The result looks perfect, but the student learns nothing. I envisioned something more human: a model that edits like a teacher, not a ghostwriter. It should understand the learner’s level and revise within that level, guiding, not overwhelming. My current prototype lets users input essays, view AI corrections, and soon teachers will be able to edit those outputs to provide tailored guidance. Some suggestions even include showing feedback in tables or bilingual notes, but I plan to validate these through user interviews and A/B testing to see what truly helps learners improve.</p>",
+      "<p>My goal isn’t to build an app that students rely on forever; it’s to build one that eventually makes itself unnecessary. I want learners to write with more awareness each time they use it, to internalize the patterns and explanations until they no longer need AI help. In this age of rapid automation, we need to design tools that keep humans thinking, not tools that do all the thinking for them. For me, this project is about creating AI that nurtures curiosity and independence, an app that helps learners learn, not just write better sentences.</p>"
+    ]
+  }
+]

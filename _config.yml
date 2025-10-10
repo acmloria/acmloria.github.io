@@ -1,0 +1,13 @@
+title: AC Loria — Portfolio
+description: AC Loria Portfolio
+# If this repo is acmloria.github.io (user site), keep baseurl empty:
+baseurl: ""                  # for user site
+url: "https://acmloria.github.io"
+
+# If this repo is a *project* site (e.g., /portfolio), change baseurl:
+# baseurl: "/portfolio"
+# url: "https://acmloria.github.io"
+
+# Optional GitHub Pages plugins (whitelisted):
+plugins:
+  - jekyll-seo-tag

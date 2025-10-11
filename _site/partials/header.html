@@ -1,18 +1,14 @@
-<div class="row">
-  <div class="col-md-2 text-center brand">
-    <a href="/index.html" class="brand">It's an AC Life</a>
-  </div>
 
-  <div class="col-md-10">
-    <nav class="navbar d-flex justify-content-between align-items-center">
-      <ul class="d-flex mb-0" style="gap:1.5rem; list-style:none;">
-        <li><a href="{{ '/index.html' | relative_url }}" class="navlink" data-nav="timeline">Projects</a></li>
-        <li><a href="{{ '/about.html' | relative_url }}" class="navlink" data-nav="about">About Me</a></li>
-        <li><a href="{{ '/blog.html' | relative_url }}" class="navlink" data-nav="blog">Blog</a></li>
+  <div class="header-inner">
+    <a href="{{ '/' | relative_url }}" class="brand">It's an AC Life</a>
+
+    <nav class="navbar">
+      <ul class="nav-list">
+        <li><a href="{{ '/index.html' | relative_url }}" class="navlink {% if page.active == 'index' %}navlink--active{% endif %}">Project</a></li>
+        <li><a href="{{ '/about.html' | relative_url }}" class="navlink {% if page.active == 'about' %}navlink--active{% endif %}">About Me</a></li>
+        <li><a href="{{ '/blog.html' | relative_url }}" class="navlink {% if page.active == 'blog' %}navlink--active{% endif %}">Blog</a></li>
+        <li><a href="https://github.com/acmloria" target="_blank" rel="noopener" class="github-link" title="My GitHub">
+          <i class="fab fa-github"></i></li>
       </ul>
-      <a href="https://github.com/acmloria" target="_blank" rel="noopener" class="github-link" title="My GitHub">
-        <i class="fab fa-github"></i>
-      </a>
     </nav>
   </div>
-</div>

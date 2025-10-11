@@ -2,13 +2,12 @@
 layout: default
 title: Blog — AC Loria
 active: blog
-css:
-  - /blog.css
 scripts:
-  - /js/render-blog.js
+  - /js/render-blog.js       # page-specific JS
 ---
+<h1 class="title text-center">Blog</h1>
 
-<div class="d-flex align-items-center flex-wrap gap-2 mb-3">
+<div class="d-flex align-items-center flex-wrap mb-3" style="gap:.35rem;">
   <input id="blog-search" class="form-control mr-2" style="max-width:260px" placeholder="Search title or tags…">
   <div id="tag-cloud" class="d-flex flex-wrap" style="gap:.35rem;"></div>
   <button id="clear-blog-filter" class="btn btn-sm btn-outline-secondary ml-2 d-none">Clear filter</button>
@@ -17,74 +16,4 @@ scripts:
 <section id="blog-list" class="list-view"></section>
 <article id="blog-post" class="post-view d-none"></article>
 
-
-<!DOCTYPE html>
-<html>
-
-<head>
-	<title>ANGELICA CASSANDRA LORIA - Machine Learning</title>
-
-	<meta data-n-head="true" charset="utf-8"/>
-	<meta data-n-head="true" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-	<meta data-n-head="true" name="format-detection" content="telephone=no"/>
-	<meta data-n-head="true" data-hid="description" name="description" content="Online Portfolio"/>
-	<meta data-n-head="true" name="theme-color" content="#000000" />
-	<meta data-n-head="true" name="google" value="notranslate" />
-	<meta data-n-head="true" name="description" content="Join me in my Web Development Bootcamp Journey!" />
-	<meta data-n-head="true" name="keywords" content="web design training, web development training, coding bootcamp, coding bootcamp philippines, coding bootcamp manila, coding bootcamp quezon city, PHP training philippines, PHP training manila, HTML & CSS training, Laravel training, Javascript training, free IT training, free IT training philippines, learn coding manila, learn coding philippines, study now pay later" />
-	<meta data-n-head="true" name="robots" content="index,follow" />
-	<meta data-n-head="true" property="og:title" content="Angelica Cassandra Loria Web Developer Portfolio" />
-
-
-	<!-- Font Awesome for Icons -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="./blog.css">
-
-	<!-- google fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Alegreya+Sans|Cinzel|Great+Vibes|Lora|Pacifico&display=swap" rel="stylesheet">
-
-
-
-	<!-- fontawesome icons -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-
-	<!-- bootstrap dependencies -->
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	
-	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-	<!-- Popper JS -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-
-	<!-- Latest compiled JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-</head>
-
-<body>
-
-  <main class="container my-4">
-    <!-- Controls -->
-
-    <!-- List view -->
-    <section id="blog-list" class="list-view"></section>
-
-    <!-- Detail view -->
-    <article id="blog-post" class="post-view d-none"></article>
-
-    <noscript><p class="text-muted">Enable JavaScript to view posts.</p></noscript>
-  </main>
-
-  <!-- Scripts -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script src="{{ '/js/render-projects.js' | relative_url }}" defer></script>
-
-  <script src="{{ '/js/render-blog.js' | relative_url }}" defer></script>
-</body>
-</html>
+<noscript><p class="text-muted">Enable JavaScript to view posts.</p></noscript>

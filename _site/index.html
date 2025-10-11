@@ -33,99 +33,43 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
   <!-- CSS files (use relative_url so it works with/without baseurl) -->
-  <link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="/css/site.css">
   
 </head>
 <body>
 
-  <header class="header mx-auto">
-  <div class="row">
-    <div class="col-md-2 text-center brand">
-      <a href="/" class="brand">It's an AC Life</a>
-    </div>
-    <div class="col-md-10">
-      <nav class="navbar d-flex justify-content-between align-items-center">
-        <ul class="nav-list" style="list-style:none; gap:1.5rem; display:flex;">
-          <li><a href="/timeline.html" class="navlink ">Timeline</a></li>
-          <li><a href="/about.html" class="navlink ">About Me</a></li>
-          <li><a href="/blog.html" class="navlink ">Blog</a></li>
-        </ul>
-        <a href="https://github.com/acmloria" target="_blank" rel="noopener" class="github-link" title="My GitHub">
-          <i class="fab fa-github"></i>
-        </a>
-      </nav>
-    </div>
+  <header class="header">
+  <div class="header-inner">
+    <a href="/" class="brand">It's an AC Life</a>
+
+    <nav class="navbar">
+      <ul class="nav-list">
+        <li><a href="/index.html" class="navlink ">Project</a></li>
+        <li><a href="/about.html" class="navlink ">About Me</a></li>
+        <li><a href="/blog.html" class="navlink ">Blog</a></li>
+        <li><a href="https://www.github.com/acmloria" target="_blank" class="fab fa-github"></i></a></li>
+      </ul>
+    </nav>
   </div>
 </header>
 
 
+
+
   <main class="container my-4">
-    <div id="project-filters" class="d-flex align-items-center mb-2" style="gap:.5rem;">
+    <!-- Page content only (no HTML/HEAD/BODY tags) -->
+
+<!-- Optional: filter bar -->
+<div id="project-filters" class="d-flex align-items-center mb-2" style="gap:.5rem;">
   <span id="filter-label" class="text-muted small d-none">Filter:</span>
   <span id="active-tag" class="badge badge-info d-none"></span>
   <button id="clear-filter" class="btn btn-sm btn-outline-secondary d-none">Clear filter</button>
 </div>
 
+<!-- Dynamic project grid -->
 <div id="project-grid" class="row w-100"></div>
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <title>AC Loria - Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="format-detection" content="telephone=no"/>
-  <meta name="description" content="Online Portfolio"/>
-  <meta name="theme-color" content="#000000"/>
-  <meta name="google" value="notranslate"/>
-  <meta name="keywords" content="web design training, web development training, coding bootcamp, coding bootcamp philippines, coding bootcamp manila, coding bootcamp quezon city, PHP training philippines, PHP training manila, HTML & CSS training, Laravel training, Javascript training, free IT training, free IT training philippines, learn coding manila, learn coding philippines, study now pay later"/>
-  <meta name="robots" content="index,follow"/>
-  <meta property="og:title" content="Angelica Cassandra Loria Web Developer Portfolio"/>
-
-  <!-- Fonts & Icons -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans|Cinzel|Great+Vibes|Lora|Pacifico&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/index.css">
-</head>
-<body>
-  <!-- <header class="header mx-auto" data-include="/partials/header.html"></header> -->
-
-  <!-- Dynamic Project Grid -->
-  <div class="container">
-    <div class="row mx-auto p-3">
-		<div id="project-filters" class="w-100 d-flex align-items-center mb-2" style="gap:.5rem;">
-  <span id="filter-label" class="text-muted small d-none">Filter:</span>
-  <span id="active-tag" class="badge badge-info d-none"></span>
-  <button id="clear-filter" class="btn btn-sm btn-outline-secondary d-none">Clear filter</button>
-</div>
-<div id="project-grid" class="row w-100"></div>
-
-      <div id="project-grid" class="row w-100"></div>
-      <noscript><p class="text-muted mt-3">Please enable JavaScript to view project cards.</p></noscript>
-
-      <!-- Inline JSON fallback (works from file://). Remove if you use projects.json over HTTP. -->
-      <!--
-      <script id="project-data" type="application/json">[ ... your JSON array ... ]</script>
-      -->
-
-</script>
-
-    </div>
-  </div>
-
-  <!-- JS (moved to bottom for reliability) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
- <script src="/js/includes.js" defer></script>
- 
-  <script src="/js/render-projects.js" defer></script>
-</body>
-</html>
+<noscript><p class="text-muted mt-3">Please enable JavaScript to view projects.</p></noscript>
 
   </main>
 
@@ -146,5 +90,27 @@
       <script src="/js/render-projects.js" defer></script>
     
   
+
+  <script>
+(function () {
+  const header = document.querySelector('.header');
+  if (!header) return;
+  const root = document.documentElement;
+  let ticking = false;
+
+  function syncPad() { root.style.setProperty('--header-current-height', header.offsetHeight + 'px'); }
+  function onScroll() {
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(() => {
+      header.classList.toggle('header--scrolled', window.scrollY > 12);
+      syncPad(); ticking = false;
+    });
+  }
+  document.addEventListener('DOMContentLoaded', () => { onScroll(); syncPad(); });
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', syncPad);
+})();
+</script>
+
 </body>
 </html>

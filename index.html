@@ -3,71 +3,18 @@ layout: default
 title: AC Loria - Portfolio
 active: home
 scripts:
-  - /js/render-projects.js
+  - /js/render-projects.js   # page-specific JS
 ---
+<!-- Page content only (no HTML/HEAD/BODY tags) -->
+
+<!-- Optional: filter bar -->
 <div id="project-filters" class="d-flex align-items-center mb-2" style="gap:.5rem;">
   <span id="filter-label" class="text-muted small d-none">Filter:</span>
   <span id="active-tag" class="badge badge-info d-none"></span>
   <button id="clear-filter" class="btn btn-sm btn-outline-secondary d-none">Clear filter</button>
 </div>
 
+<!-- Dynamic project grid -->
 <div id="project-grid" class="row w-100"></div>
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <title>AC Loria - Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="format-detection" content="telephone=no"/>
-  <meta name="description" content="Online Portfolio"/>
-  <meta name="theme-color" content="#000000"/>
-  <meta name="google" value="notranslate"/>
-  <meta name="keywords" content="web design training, web development training, coding bootcamp, coding bootcamp philippines, coding bootcamp manila, coding bootcamp quezon city, PHP training philippines, PHP training manila, HTML & CSS training, Laravel training, Javascript training, free IT training, free IT training philippines, learn coding manila, learn coding philippines, study now pay later"/>
-  <meta name="robots" content="index,follow"/>
-  <meta property="og:title" content="Angelica Cassandra Loria Web Developer Portfolio"/>
-
-  <!-- Fonts & Icons -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans|Cinzel|Great+Vibes|Lora|Pacifico&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="{{ '/index.css' | relative_url }}">
-</head>
-<body>
-  <!-- <header class="header mx-auto" data-include="/partials/header.html"></header> -->
-
-  <!-- Dynamic Project Grid -->
-  <div class="container">
-    <div class="row mx-auto p-3">
-		<div id="project-filters" class="w-100 d-flex align-items-center mb-2" style="gap:.5rem;">
-  <span id="filter-label" class="text-muted small d-none">Filter:</span>
-  <span id="active-tag" class="badge badge-info d-none"></span>
-  <button id="clear-filter" class="btn btn-sm btn-outline-secondary d-none">Clear filter</button>
-</div>
-<div id="project-grid" class="row w-100"></div>
-
-      <div id="project-grid" class="row w-100"></div>
-      <noscript><p class="text-muted mt-3">Please enable JavaScript to view project cards.</p></noscript>
-
-      <!-- Inline JSON fallback (works from file://). Remove if you use projects.json over HTTP. -->
-      <!--
-      <script id="project-data" type="application/json">[ ... your JSON array ... ]</script>
-      -->
-
-</script>
-
-    </div>
-  </div>
-
-  <!-- JS (moved to bottom for reliability) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
- <script src="/js/includes.js" defer></script>
- 
-  <script src="{{ '/js/render-projects.js' | relative_url }}" defer></script>
-</body>
-</html>
+<noscript><p class="text-muted mt-3">Please enable JavaScript to view projects.</p></noscript>

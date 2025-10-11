@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
   <!-- CSS files (use relative_url so it works with/without baseurl) -->
-  <link rel="stylesheet" href="{{ '/index.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/css/site.css' | relative_url }}">
   {% if page.css %}
     {% for css in page.css %}
       <link rel="stylesheet" href="{{ css | relative_url }}">
@@ -44,5 +44,27 @@
       <script src="{{ js | relative_url }}" defer></script>
     {% endfor %}
   {% endif %}
+
+  <script>
+(function () {
+  const header = document.querySelector('.header');
+  if (!header) return;
+  const root = document.documentElement;
+  let ticking = false;
+
+  function syncPad() { root.style.setProperty('--header-current-height', header.offsetHeight + 'px'); }
+  function onScroll() {
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(() => {
+      header.classList.toggle('header--scrolled', window.scrollY > 12);
+      syncPad(); ticking = false;
+    });
+  }
+  document.addEventListener('DOMContentLoaded', () => { onScroll(); syncPad(); });
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', syncPad);
+})();
+</script>
+
 </body>
 </html>

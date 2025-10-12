@@ -71,19 +71,25 @@
   const el = document.getElementById('site-view-count');
   if (!el) return;
 
-  // Avoid double-counting while user stays on the site (per tab/session)
-  const KEY = 'ac_site_viewed';
-  if (!sessionStorage.getItem(KEY)) {
-    sessionStorage.setItem(KEY, '1');
-    // increment and get the total
-    fetch('https://api.countapi.xyz/hit/acmloria.github.io/total')
-      .then(r => r.json()).then(d => el.textContent = d.value)
-      .catch(() => el.textContent = '…');
+  const NAMESPACE = 'acmloria-portfolio';  // no dots!
+  const KEY = 'total';
+
+  // Count once per session
+  const SEEN = 'viewed_' + KEY;
+  const urlHit = `https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`;
+  const urlGet = `https://api.countapi.xyz/get/${NAMESPACE}/${KEY}`;
+
+  function show(v) { el.textContent = v || 0; }
+
+  if (!sessionStorage.getItem(SEEN)) {
+    sessionStorage.setItem(SEEN, '1');
+    fetch(urlHit)
+      .then(r => r.json()).then(d => show(d.value))
+      .catch(() => el.textContent = 'error');
   } else {
-    // just read the current total without incrementing (optional)
-    fetch('https://api.countapi.xyz/get/acmloria.github.io/total')
-      .then(r => r.json()).then(d => el.textContent = d.value)
-      .catch(() => el.textContent = '…');
+    fetch(urlGet)
+      .then(r => r.json()).then(d => show(d.value))
+      .catch(() => el.textContent = 'error');
   }
 })();
 </script>

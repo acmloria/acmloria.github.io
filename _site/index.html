@@ -73,9 +73,10 @@
 
   </main>
 
-  <footer class="footer text-center mx-auto p-4">
+  <footer class="footer text-center p-4">
   <div class="footer-content">
-    &copy; AC Loria — Portfolio, unless otherwise stated
+    &copy; Angelica Cassandra Loria, unless otherwise stated
+    <span class="ml-3">Views: <span id="site-view-count">—</span></span>
   </div>
 </footer>
 
@@ -109,6 +110,28 @@
   document.addEventListener('DOMContentLoaded', () => { onScroll(); syncPad(); });
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', syncPad);
+})();
+</script>
+
+<script>
+(function () {
+  const el = document.getElementById('site-view-count');
+  if (!el) return;
+
+  // Avoid double-counting while user stays on the site (per tab/session)
+  const KEY = 'ac_site_viewed';
+  if (!sessionStorage.getItem(KEY)) {
+    sessionStorage.setItem(KEY, '1');
+    // increment and get the total
+    fetch('https://api.countapi.xyz/hit/acmloria.github.io/total')
+      .then(r => r.json()).then(d => el.textContent = d.value)
+      .catch(() => el.textContent = '…');
+  } else {
+    // just read the current total without incrementing (optional)
+    fetch('https://api.countapi.xyz/get/acmloria.github.io/total')
+      .then(r => r.json()).then(d => el.textContent = d.value)
+      .catch(() => el.textContent = '…');
+  }
 })();
 </script>
 

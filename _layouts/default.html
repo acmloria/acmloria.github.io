@@ -72,20 +72,23 @@
   const el = document.getElementById('site-view-count');
   if (!el) return;
 
-  const WORKER_BASE = 'https://acmloria-github-counter.acmloria.workers.dev/'; // ← your worker URL
+  // NO trailing slash:
+  const WORKER_BASE = 'https://acmloria-github-counter.acmloria.workers.dev';
   const SESSION_KEY = 'viewed_site_session';
-  const COUNTER_NAME = 'acmloria-github'; // or leave empty to use default
+  const COUNTER_NAME = 'acmloria-github';
 
-  const upURL  = `${WORKER_BASE}/up${COUNTER_NAME ? `?name=${encodeURIComponent(COUNTER_NAME)}` : ''}`;
-  const getURL = `${WORKER_BASE}/get${COUNTER_NAME ? `?name=${encodeURIComponent(COUNTER_NAME)}` : ''}`;
+  // Construct URLs with a single slash
+  const upURL  = `${WORKER_BASE}/up?name=${encodeURIComponent(COUNTER_NAME)}`;
+  const getURL = `${WORKER_BASE}/get?name=${encodeURIComponent(COUNTER_NAME)}`;
 
   function show(n){ el.textContent = typeof n === 'number' ? n : '0'; }
 
   try {
+    // For testing, force an increment first (auto-creates the counter if missing)
     if (!sessionStorage.getItem(SESSION_KEY)) {
       sessionStorage.setItem(SESSION_KEY, '1');
-      await fetch(upURL, { method: 'POST' });
     }
+    await fetch(upURL, { method: 'POST' });     // always up first (safe)
     const r = await fetch(getURL);
     const d = await r.json();
     show(d.count);

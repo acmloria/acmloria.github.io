@@ -66,31 +66,40 @@
 })();
 </script>
 
+
 <script>
 (function () {
-  const el = document.getElementById('site-view-count');
-  if (!el) return;
+  const out = document.getElementById('site-view-count');
+  if (!out) return;
 
-  const NAMESPACE = 'acmloria-portfolio';  // no dots!
-  const KEY = 'total';
+  const BASE = 'https://api.counterapi.dev/v1'; // public, no-auth
+  const NAMESPACE = 'acmloria-portfolio';       // letters/numbers/dashes only
+  const NAME = 'total';                         // your counter name
+  const SEEN_KEY = 'viewed_total_session';      // avoid double-count this tab
 
-  // Count once per session
-  const SEEN = 'viewed_' + KEY;
-  const urlHit = `https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`;
-  const urlGet = `https://api.countapi.xyz/get/${NAMESPACE}/${KEY}`;
+  function show(v){ out.textContent = typeof v === 'number' ? v : '0'; }
 
-  function show(v) { el.textContent = v || 0; }
-
-  if (!sessionStorage.getItem(SEEN)) {
-    sessionStorage.setItem(SEEN, '1');
-    fetch(urlHit)
-      .then(r => r.json()).then(d => show(d.value))
-      .catch(() => el.textContent = 'error');
-  } else {
-    fetch(urlGet)
-      .then(r => r.json()).then(d => show(d.value))
-      .catch(() => el.textContent = 'error');
+  async function get(url){
+    const r = await fetch(url, { cache: 'no-store' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const d = await r.json();
+    return d.count ?? d.value ?? d; // API returns {count: N} or {value: N}
   }
+
+  (async () => {
+    try {
+      // increment once per browser TAB session
+      if (!sessionStorage.getItem(SEEN_KEY)) {
+        sessionStorage.setItem(SEEN_KEY, '1');
+        await get(`${BASE}/${NAMESPACE}/${NAME}/up`);
+      }
+      const n = await get(`${BASE}/${NAMESPACE}/${NAME}`);
+      show(n);
+    } catch (e) {
+      console.warn('counter error:', e);
+      out.textContent = '…';
+    }
+  })();
 })();
 </script>
 

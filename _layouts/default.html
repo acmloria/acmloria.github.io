@@ -72,33 +72,43 @@
   const el = document.getElementById('site-view-count');
   if (!el) return;
 
-  // NO trailing slash:
-  const WORKER_BASE = 'https://acmloria-github-counter.acmloria.workers.dev';
+  const WORKSPACE = 'acmloria-github';
+  const COUNTER   = 'acmloria-github';
+  const BASE = `https://api.counterapi.dev/v2/${WORKSPACE}/${COUNTER}`;
   const SESSION_KEY = 'viewed_site_session';
-  const COUNTER_NAME = 'acmloria-github';
 
-  // Construct URLs with a single slash
-  const upURL  = `${WORKER_BASE}/up?name=${encodeURIComponent(COUNTER_NAME)}`;
-  const getURL = `${WORKER_BASE}/get?name=${encodeURIComponent(COUNTER_NAME)}`;
+  function show(n){ el.textContent = Number.isFinite(n) ? n : '0'; }
 
-  function show(n){ el.textContent = typeof n === 'number' ? n : '0'; }
+  async function readCount(){
+    const r = await fetch(BASE, { cache: 'no-store' });
+    if (!r.ok) throw new Error('read ' + r.status);
+    const j = await r.json();
+    // API returns { code: "200", data: { up_count, down_count, ... } }
+    return j?.data?.up_count ?? 0;
+  }
+
+  async function increment(){
+    const r = await fetch(BASE + '/up', { method: 'POST' });
+    if (!r.ok) throw new Error('up ' + r.status);
+    const j = await r.json();
+    // Some responses return { count } or { data: { up_count } }
+    return j?.count ?? j?.data?.up_count ?? 0;
+  }
 
   try {
-    // For testing, force an increment first (auto-creates the counter if missing)
+    // Count once per browser TAB session
     if (!sessionStorage.getItem(SESSION_KEY)) {
       sessionStorage.setItem(SESSION_KEY, '1');
+      await increment();
     }
-    await fetch(upURL, { method: 'POST' });     // always up first (safe)
-    const r = await fetch(getURL);
-    const d = await r.json();
-    show(d.count);
+    const n = await readCount();
+    show(n);
   } catch (e) {
-    console.warn('counter worker error:', e);
+    console.warn('counter error:', e);
     el.textContent = '…';
   }
 })();
 </script>
-
 
 </body>
 </html>

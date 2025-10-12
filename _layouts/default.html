@@ -79,36 +79,37 @@
 
   function show(n){ el.textContent = Number.isFinite(n) ? n : '0'; }
 
-  async function readCount(){
-    const r = await fetch(BASE, { cache: 'no-store' });
-    if (!r.ok) throw new Error('read ' + r.status);
-    const j = await r.json();
-    // API returns { code: "200", data: { up_count, down_count, ... } }
-    return j?.data?.up_count ?? 0;
-  }
-
-  async function increment(){
-    const r = await fetch(BASE + '/up', { method: 'POST' });
-    if (!r.ok) throw new Error('up ' + r.status);
-    const j = await r.json();
-    // Some responses return { count } or { data: { up_count } }
-    return j?.count ?? j?.data?.up_count ?? 0;
-  }
-
+  // 1. Fetch the current count first (fast display)
   try {
-    // Count once per browser TAB session
-    if (!sessionStorage.getItem(SESSION_KEY)) {
-      sessionStorage.setItem(SESSION_KEY, '1');
-      await increment();
+    const r = await fetch(BASE, { cache: 'no-store' });
+    if (r.ok) {
+      const j = await r.json();
+      const count = j?.data?.up_count ?? 0;
+      show(count);
+    } else {
+      console.warn('counter get failed', r.status);
+      el.textContent = '…';
     }
-    const n = await readCount();
-    show(n);
   } catch (e) {
-    console.warn('counter error:', e);
+    console.warn('counter get error', e);
     el.textContent = '…';
   }
+
+  // 2. Increment later, asynchronously (doesn't block render)
+  setTimeout(() => {
+    if (sessionStorage.getItem(SESSION_KEY)) return; // skip if already viewed this tab
+    sessionStorage.setItem(SESSION_KEY, '1');
+    fetch(BASE + '/up', { method: 'POST' })
+      .then(r => r.json())
+      .then(j => {
+        const n = j?.count ?? j?.data?.up_count;
+        if (Number.isFinite(n)) show(n);
+      })
+      .catch(e => console.warn('counter up error', e));
+  }, 1500); // 1.5s delay to let page finish loading
 })();
 </script>
+
 
 </body>
 </html>

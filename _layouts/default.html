@@ -68,40 +68,34 @@
 
 
 <script>
-(function () {
-  const out = document.getElementById('site-view-count');
-  if (!out) return;
+(async () => {
+  const el = document.getElementById('site-view-count');
+  if (!el) return;
 
-  const BASE = 'https://api.counterapi.dev/v1'; // public, no-auth
-  const NAMESPACE = 'acmloria-portfolio';       // letters/numbers/dashes only
-  const NAME = 'total';                         // your counter name
-  const SEEN_KEY = 'viewed_total_session';      // avoid double-count this tab
+  const WORKER_BASE = 'https://ac-counter.YOURSUBDOMAIN.workers.dev'; // ← your worker URL
+  const SESSION_KEY = 'viewed_site_session';
+  const COUNTER_NAME = 'acmloria-github'; // or leave empty to use default
 
-  function show(v){ out.textContent = typeof v === 'number' ? v : '0'; }
+  const upURL  = `${WORKER_BASE}/up${COUNTER_NAME ? `?name=${encodeURIComponent(COUNTER_NAME)}` : ''}`;
+  const getURL = `${WORKER_BASE}/get${COUNTER_NAME ? `?name=${encodeURIComponent(COUNTER_NAME)}` : ''}`;
 
-  async function get(url){
-    const r = await fetch(url, { cache: 'no-store' });
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    const d = await r.json();
-    return d.count ?? d.value ?? d; // API returns {count: N} or {value: N}
-  }
+  function show(n){ el.textContent = typeof n === 'number' ? n : '0'; }
 
-  (async () => {
-    try {
-      // increment once per browser TAB session
-      if (!sessionStorage.getItem(SEEN_KEY)) {
-        sessionStorage.setItem(SEEN_KEY, '1');
-        await get(`${BASE}/${NAMESPACE}/${NAME}/up`);
-      }
-      const n = await get(`${BASE}/${NAMESPACE}/${NAME}`);
-      show(n);
-    } catch (e) {
-      console.warn('counter error:', e);
-      out.textContent = '…';
+  try {
+    if (!sessionStorage.getItem(SESSION_KEY)) {
+      sessionStorage.setItem(SESSION_KEY, '1');
+      await fetch(upURL, { method: 'POST' });
     }
-  })();
+    const r = await fetch(getURL);
+    const d = await r.json();
+    show(d.count);
+  } catch (e) {
+    console.warn('counter worker error:', e);
+    el.textContent = '…';
+  }
 })();
 </script>
+
 
 </body>
 </html>

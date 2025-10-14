@@ -67,7 +67,7 @@
 </script>
 
 
-<!-- <script>
+<script>
 (async () => {
   const el = document.getElementById('site-view-count');
   if (!el) return;
@@ -79,7 +79,7 @@
 
   function show(n){ el.textContent = Number.isFinite(n) ? n : '0'; }
 
-  // 1️⃣ Always read the current count first
+  //Reading current count
   try {
     const res = await fetch(BASE, { cache: 'no-store' });
     if (res.ok) {
@@ -95,7 +95,7 @@
     el.textContent = '…';
   }
 
-  // 2️⃣ Then, increment asynchronously if user hasn’t been counted yet
+  // Then, increment asynchronously if user hasn’t been counted yet
   setTimeout(async () => {
     if (sessionStorage.getItem(SESSION_KEY)) return; // already counted
     sessionStorage.setItem(SESSION_KEY, '1');        // mark as counted
@@ -114,43 +114,7 @@
     }
   }, 1000); // delay 1 second (non-blocking)
 })();
-</script> -->
-
-<script>
-(async () => {
-  const el = document.getElementById('site-view-count');
-  if (!el) return;
-
-  // Use your Worker base URL WITHOUT trailing slash
-  const WORKER_BASE = 'https://acmloria-github-counter.acmloria.workers.dev'; // or https://count.acmloria.com
-  const NAME = 'acmloria-github';
-  const SESSION_KEY = 'viewed_site_session';
-
-  const urlUp  = `${WORKER_BASE}/up?name=${encodeURIComponent(NAME)}`;
-  const urlGet = `${WORKER_BASE}/get?name=${encodeURIComponent(NAME)}`;
-
-  function show(n){ el.textContent = Number.isFinite(n) ? n : '0'; }
-
-  // increment once per tab session, then read current
-  setTimeout(async () => {
-    try {
-      if (!sessionStorage.getItem(SESSION_KEY)) {
-        sessionStorage.setItem(SESSION_KEY, '1');
-        await fetch(urlUp, { method: 'POST' });
-      }
-      const r = await fetch(urlGet, { cache: 'no-store' });
-      if (r.ok) {
-        const d = await r.json();
-        show(d.count);
-      }
-    } catch (e) {
-      // quietly fail: just leave the placeholder
-      // console.warn('counter error', e);
-    }
-  }, 600);
-})();
 </script>
-
 
 </body>
 </html>

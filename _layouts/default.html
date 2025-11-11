@@ -69,7 +69,7 @@
 
 <script>
 (() => {
-  const VIEW_EL = document.getElementById('site-view-count'); // optional
+  const VIEW_EL = document.getElementById('site-view-count');
   const WORKSPACE = 'acmloria-github';
   const NAME = 'acmloria-github';
   const BASE = `https://api.counterapi.dev/v2/${WORKSPACE}/${NAME}`;
@@ -77,55 +77,52 @@
 
   const show = (n) => { if (VIEW_EL) VIEW_EL.textContent = Number.isFinite(n) ? String(n) : '0'; };
 
-  // 1) Read current count (simple endpoint → { count })
-  const readCount = async () => {
-    try {
-      const res = await fetch(BASE, { cache: 'no-store' });
-      if (!res.ok) throw new Error(`GET count ${res.status}`);
-      const j = await res.json();
-      return Number.isFinite(j?.count) ? j.count : 0;
-    } catch (e) {
-      console.warn(e);
-      return NaN;
-    }
-  };
+  // 1) Read current up_count (from /stats → { data: { up_count } })
+  async function readUpCount() {
+    const res = await fetch(`${BASE}/stats`, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`stats ${res.status}`);
+    const j = await res.json();
+    return Number.isFinite(j?.data?.up_count) ? j.data.up_count : NaN;
+  }
 
-  // 2) Increment (GET /up); keepalive helps if user leaves the page fast
-  const increment = async () => {
-    try {
-      const res = await fetch(`${BASE}/up`, { method: 'GET', keepalive: true });
-      if (!res.ok) throw new Error(`UP ${res.status}`);
-      const j = await res.json();
-      // V2 "get" returns {count}; many "/up" handlers also return {count}
-      // fallback if provider returns { data: { up_count } }
-      return Number.isFinite(j?.count) ? j.count :
-             Number.isFinite(j?.data?.up_count) ? j.data.up_count : NaN;
-    } catch (e) {
-      console.warn(e);
-      return NaN;
-    }
-  };
+  // 2) Increment using /up (GET)
+  async function increment() {
+    const res = await fetch(`${BASE}/up`, { method: 'GET', keepalive: true });
+    if (!res.ok) throw new Error(`up ${res.status}`);
+    // Many providers return { count }; keep a fallback for { data: { up_count } }
+    const j = await res.json();
+    return Number.isFinite(j?.data?.up_count) ? j.data.up_count
+         : Number.isFinite(j?.count)          ? j.count
+         : NaN;
+  }
 
   (async () => {
-    // Initial display
-    const initial = await readCount();
-    if (Number.isFinite(initial)) show(initial);
+    // Show current up_count
+    const current = await readUpCount().catch(() => NaN);
+    if (Number.isFinite(current)) show(current);
 
     // Count this session once
     if (!sessionStorage.getItem(SEEN)) {
       sessionStorage.setItem(SEEN, '1');
-      // Optimistic UI: show +1 immediately
-      if (Number.isFinite(initial)) show(initial + 1);
 
-      const afterUp = await increment();
-      if (Number.isFinite(afterUp)) {
-        show(afterUp);
-      } else {
-        // V2 buffering: re-read after a short delay
+      // Optimistic UI: display +1 immediately if we had a number
+      if (Number.isFinite(current)) show(current + 1);
+
+      // Increment on the server
+      const after = await increment().catch(() => NaN);
+
+      // Due to buffering, re-read /stats if we didn't get a clean number back
+      if (Number.isFinite(after)) {
+        // If increment returned {count}, it may equal up_count; re-read to be sure
         setTimeout(async () => {
-          const reread = await readCount();
+          const reread = await readUpCount().catch(() => NaN);
           if (Number.isFinite(reread)) show(reread);
-        }, 1200);
+        }, 800);
+      } else {
+        setTimeout(async () => {
+          const reread = await readUpCount().catch(() => NaN);
+          if (Number.isFinite(reread)) show(reread);
+        }, 800);
       }
     }
   })();

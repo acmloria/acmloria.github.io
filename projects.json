@@ -11,7 +11,7 @@
     "title": "NLP and Education",
     "image": "./images/tokenize_app.png",
     "alt": "ML cover",
-    "primary": { "label": "Tokenization App", "href": "https://github.com/acmloria/tokenization_app" },
+    "primary": { "label": "Tokenization App", "href": "https://github.com/acmloria/tokenizer_app" },
     "description": "An app designed to help advanced placement students understand tokenization in NLP.",
     "tags": ["ML", "AI", "NLP", "CI/CD"]
   }

@@ -68,53 +68,70 @@
 
 
 <script>
-(async () => {
-  const el = document.getElementById('site-view-count');
-  if (!el) return;
-
+(() => {
+  const VIEW_EL = document.getElementById('site-view-count'); // optional
   const WORKSPACE = 'acmloria-github';
-  const COUNTER   = 'acmloria-github';
-  const BASE = `https://api.counterapi.dev/v2/${WORKSPACE}/${COUNTER}`;
-  const SESSION_KEY = 'viewed_site_session';
+  const NAME = 'acmloria-github';
+  const BASE = `https://api.counterapi.dev/v2/${WORKSPACE}/${NAME}`;
+  const SEEN = 'viewed_site_session';
 
-  function show(n){ el.textContent = Number.isFinite(n) ? n : '0'; }
+  const show = (n) => { if (VIEW_EL) VIEW_EL.textContent = Number.isFinite(n) ? String(n) : '0'; };
 
-  //Reading current count
-  try {
-    const res = await fetch(BASE, { cache: 'no-store' });
-    if (res.ok) {
-      const data = await res.json();
-      const count = data?.data?.up_count ?? 0;
-      show(count);
-    } else {
-      el.textContent = '…';
-      console.warn('counter get failed', res.status);
-    }
-  } catch (e) {
-    console.warn('counter get error:', e);
-    el.textContent = '…';
-  }
-
-  // Then, increment asynchronously if user hasn’t been counted yet
-  setTimeout(async () => {
-    if (sessionStorage.getItem(SESSION_KEY)) return; // already counted
-    sessionStorage.setItem(SESSION_KEY, '1');        // mark as counted
-
+  // 1) Read current count (simple endpoint → { count })
+  const readCount = async () => {
     try {
-      const r = await fetch(BASE + '/up', { method: 'POST' });
-      if (r.ok) {
-        const j = await r.json();
-        const newCount = j?.count ?? j?.data?.up_count;
-        if (Number.isFinite(newCount)) show(newCount);
-      } else {
-        console.warn('counter up failed', r.status);
-      }
+      const res = await fetch(BASE, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`GET count ${res.status}`);
+      const j = await res.json();
+      return Number.isFinite(j?.count) ? j.count : 0;
     } catch (e) {
-      console.warn('counter up error:', e);
+      console.warn(e);
+      return NaN;
     }
-  }, 1000); // delay 1 second (non-blocking)
+  };
+
+  // 2) Increment (GET /up); keepalive helps if user leaves the page fast
+  const increment = async () => {
+    try {
+      const res = await fetch(`${BASE}/up`, { method: 'GET', keepalive: true });
+      if (!res.ok) throw new Error(`UP ${res.status}`);
+      const j = await res.json();
+      // V2 "get" returns {count}; many "/up" handlers also return {count}
+      // fallback if provider returns { data: { up_count } }
+      return Number.isFinite(j?.count) ? j.count :
+             Number.isFinite(j?.data?.up_count) ? j.data.up_count : NaN;
+    } catch (e) {
+      console.warn(e);
+      return NaN;
+    }
+  };
+
+  (async () => {
+    // Initial display
+    const initial = await readCount();
+    if (Number.isFinite(initial)) show(initial);
+
+    // Count this session once
+    if (!sessionStorage.getItem(SEEN)) {
+      sessionStorage.setItem(SEEN, '1');
+      // Optimistic UI: show +1 immediately
+      if (Number.isFinite(initial)) show(initial + 1);
+
+      const afterUp = await increment();
+      if (Number.isFinite(afterUp)) {
+        show(afterUp);
+      } else {
+        // V2 buffering: re-read after a short delay
+        setTimeout(async () => {
+          const reread = await readCount();
+          if (Number.isFinite(reread)) show(reread);
+        }, 1200);
+      }
+    }
+  })();
 })();
 </script>
+
 
 </body>
 </html>

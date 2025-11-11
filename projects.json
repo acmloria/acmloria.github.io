@@ -6,6 +6,14 @@
     "primary": { "label": "Project 慢慢來", "href": "https://github.com/acmloria/manmanlai" },
     "description": "An essay corrector app using NLP to help learners improve writing skills.",
     "tags": ["ML", "AI", "NLP", "CI/CD"]
+  },
+  {
+    "title": "NLP and Education",
+    "image": "./images/tokenize_app.png",
+    "alt": "ML cover",
+    "primary": { "label": "Tokenization App", "href": "https://github.com/acmloria/tokenization_app" },
+    "description": "An app designed to help advanced placement students understand tokenization in NLP.",
+    "tags": ["ML", "AI", "NLP", "CI/CD"]
   }
   
 ]
